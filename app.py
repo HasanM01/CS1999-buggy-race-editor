@@ -28,6 +28,9 @@ def create_buggy():
     elif request.method == 'POST':
         msg=""
         qty_wheels = request.form['qty_wheels']
+        if not qty_wheels.isdigit():
+            msg = f"Please enter a number (integer), {qty_wheels} is not a valid integer"
+            return render_template("buggy-form.html", msg = msg )
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
@@ -53,7 +56,7 @@ def show_buggies():
     con.row_factory = sql.Row
     cur = con.cursor()
     cur.execute("SELECT * FROM buggies")
-    record = cur.fetchone(); 
+    record = cur.fetchone();
     return render_template("buggy.html", buggy = record)
 
 #------------------------------------------------------------
@@ -80,7 +83,7 @@ def summary():
     cur = con.cursor()
     cur.execute("SELECT * FROM buggies WHERE id=? LIMIT 1", (DEFAULT_BUGGY_ID))
 
-    buggies = dict(zip([column[0] for column in cur.description], cur.fetchone())).items() 
+    buggies = dict(zip([column[0] for column in cur.description], cur.fetchone())).items()
     return jsonify({ key: val for key, val in buggies if (val != "" and val is not None) })
 
 # You shouldn't need to add anything below this!
