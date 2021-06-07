@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Edit buggy {{ buggy['id'] }}</h1>
+  <p>
+    {{ msg }}
+  </p>
+
+  <form action="/edit/{{ buggy['id'] }}" method="post">
+
+      <label for="qty_wheels">Number of wheels:</label>
+      <label>
+          <input type="text" name="qty_wheels" value="{{ buggy['qty_wheels'] }}">
+      </label>
+
+      <br><br>
+      <label for="power_type">Power type:</label>
+      <select name="power_type" id="power_type">
+          {%  for p_type in power_options %}
+              {% if  p_type == buggy['power_type'] %}
+                  <option value="{{ p_type }}" Selected>{{ p_type }}</option>
+              {% else %}
+                  <option value="{{ p_type }}" >{{ p_type }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="power_units">Power units:</label>
+      <label>
+          <input type="text" name="power_units" value="{{ buggy['power_units'] }}">
+      </label>
+
+      <br><br>
+      <label for="aux_power_type">Aux power type:</label>
+      <select name="aux_power_type" id="aux_power_type">
+          {%  for ap_type in aux_power_options %}
+              {% if  p_type == buggy['aux_power_type'] %}
+                <option value="{{ ap_type }}" Selected>{{ ap_type }}</option>
+              {% else %}
+                <option value="{{ ap_type }}">{{ ap_type }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="aux_power_units">Aux power units:</label>
+      <label>
+          <input type="text" name="aux_power_units" value="{{ buggy['aux_power_units'] }}">
+      </label>
+
+      <br><br>
+      <label for="hamster_booster">Hamster booster:</label>
+      <label>
+          <input type="text" name="hamster_booster" value="{{ buggy['hamster_booster'] }}">
+      </label>
+
+      <br><br>
+      <label for="flag_color">Flag color:</label>
+      <select name="flag_color" id="flag_color">
+          {%  for color in color_options %}
+              {% if  p_type == buggy['flag_color'] %}
+                <option value="{{ color }}" Selected>{{ color }}</option>
+              {% else %}
+                <option value="{{ color }}">{{ color }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="flag_pattern">Flag pattern:</label>
+      <select name="flag_pattern" id="flag_pattern">
+          {%  for pattern in flag_pattern_options %}
+              {% if  p_type == buggy['flag_pattern'] %}
+                <option value="{{ pattern }}" Selected>{{ pattern }}</option>
+              {% else %}
+                <option value="{{ pattern }}">{{ pattern }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="flag_color_secondary">Secondary flag color:</label>
+      <select name="flag_color_secondary" id="flag_color_secondary">
+          {%  for s_color in secondary_color_options %}
+              {% if  p_type == buggy['flag_color_secondary'] %}
+                <option value="{{ s_color }}" Selected>{{ s_color }}</option>
+              {% else %}
+                <option value="{{ s_color }}">{{ s_color }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="tyres">Type of tyres:</label>
+      <select name="tyres" id="tyres">
+          {%  for tyre in tyre_options %}
+              {% if  p_type == buggy['tyres'] %}
+                <option value="{{ tyre }}" Selected>{{ tyre }}</option>
+              {% else %}
+                <option value="{{ tyre }}">{{ tyre }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="qty_tyres">Number of tyres:</label>
+      <label>
+          <input type="text" name="qty_tyres" value="{{ buggy['qty_tyres'] }}">
+      </label>
+
+      <br><br>
+      <label for="armour">Armour:</label>
+      <select name="armour" id="armour">
+          {%  for armour in armour_options %}
+              {% if  p_type == buggy['armour'] %}
+                <option value="{{ armour }}" Selected>{{ armour }}</option>
+              {% else %}
+                <option value="{{ armour }}">{{ armour }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="attack">Attack:</label>
+      <select name="attack" id="attack">
+          {%  for a in attack_options %}
+              {% if  p_type == buggy['attack'] %}
+                <option value="{{ a }}" Selected>{{ a }}</option>
+              {% else %}
+                <option value="{{ a }}">{{ a }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="qty_attack">Attack quantity:</label>
+      <label>
+          <input type="text" name="qty_attack" value="{{ buggy['qty_attack'] }}">
+      </label>
+
+      <br><br>
+      <label for="fireproof">Fireproof:</label>
+      <select name="fireproof" id="flag_color">
+          {%  for b in bool_options %}
+              {% if  p_type == buggy['fireproof'] %}
+                <option value="{{ b }}" Selected>{{ b }}</option>
+              {% else %}
+                <option value="{{ b }}">{{ b }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="insulated">Insulated:</label>
+      <select name="insulated" id="insulated">
+          {%  for b in bool_options %}
+              {% if  p_type == buggy['insulated'] %}
+                <option value="{{ b }}" Selected>{{ b }}</option>
+              {% else %}
+                <option value="{{ b }}">{{ b }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="antibiotic">Antibiotics:</label>
+      <select name="antibiotic" id="antibiotic">
+          {%  for b in bool_options %}
+              {% if  p_type == buggy['antibiotic'] %}
+                <option value="{{ b }}" Selected>{{ b }}</option>
+              {% else %}
+                <option value="{{ b }}">{{ b }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <label for="banging">Banging:</label>
+      <select name="banging" id="banging">
+          {%  for b in bool_options %}
+              {% if  p_type == buggy['banging'] %}
+                <option value="{{ b }}" Selected>{{ b }}</option>
+              {% else %}
+                <option value="{{ b }}">{{ b }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="algo">Algo:</label>
+      <select name="algo" id="algo">
+          {%  for al in algo_options %}
+              {% if  p_type == buggy['algo'] %}
+                <option value="{{ al }}" Selected>{{ al }}</option>
+              {% else %}
+                <option value="{{ al }}">{{ al }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+      <br><br>
+
+      <br><br>
+      <input type="submit" class="button">
+{#    <input type="submit" class="button" value="{{ buggy['id'] }}">#}
+{#    <a href="/edit/{{ buggy['id'] }}" class="button">Submit</a>#}
+
+  </form>
+
+
+  <p>
+{#    <a href="/edit" class="button">Submit edits</a>#}
+    <a href="/" class="button">home</a>
+  </p>
+
+{% endblock %}
