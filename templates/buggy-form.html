@@ -3,17 +3,153 @@
 {% block content %}
 
   <h1>Make buggy</h1>
-
-    <p>
+  <p>
     {{ msg }}
   </p>
 
   <form action="/new" method="post">
-    <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" />
+      <h1>Make buggy</h1>
+      <p>
+          {{ msg }}
+      </p>
+
+      <label for="qty_wheels">Number of wheels:</label>
+      <input type="text" name="qty_wheels" value="4">
+
+      <br><br>
+      <label for="power_type">Power type:</label>
+      <select name="power_type" id="power_type">
+          {%  for p_type in power_options %}
+              <option value="{{ p_type }}">{{ p_type }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="power_units">Power units:</label>
+      <input type="text" name="power_units" value="1">
+
+      <br><br>
+      <label for="aux_power_type">Aux power type:</label>
+      <select name="aux_power_type" id="aux_power_type">
+          {%  for ap_type in aux_power_options %}
+              <option value="{{ ap_type }}">{{ ap_type }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="aux_power_units">Aux power units:</label>
+      <input type="text" name="aux_power_units" value="0">
+
+      <br><br>
+      <label for="hamster_booster">Hamster booster:</label>
+      <input type="text" name="hamster_booster" value="0">
+
+      <br><br>
+      <label for="flag_color">Flag color:</label>
+      <select name="flag_color" id="flag_color">
+          {%  for color in color_options %}
+              <option value="{{ color }}">{{ color }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="flag_pattern">Flag pattern:</label>
+      <select name="flag_pattern" id="flag_pattern">
+          {%  for pattern in flag_pattern_options %}
+              <option value="{{ pattern }}">{{ pattern }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="flag_color_secondary">Secondary flag color:</label>
+      <select name="flag_color_secondary" id="flag_color_secondary">
+          {%  for s_color in secondary_color_options %}
+              <option value="{{ s_color }}">{{ s_color }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="tyres">Type of tyres:</label>
+      <select name="tyres" id="tyres">
+          {%  for tyre in tyre_options %}
+              <option value="{{ tyre }}">{{ tyre }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="qty_tyres">Number of tyres:</label>
+      <input type="text" name="qty_tyres" value="4">
+
+      <br><br>
+      <label for="armour">Armour:</label>
+      <select name="armour" id="armour">
+          {%  for armour in armour_options %}
+              <option value="{{ armour }}">{{ armour }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="attack">Attack:</label>
+      <select name="attack" id="attack">
+          {%  for a in attack_options %}
+              <option value="{{ a }}">{{ a }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="qty_attack">Attack quantity:</label>
+      <input type="text" name="qty_attack" value="0">
+
+{#      <br><br>#}
+{##}
+{#      <label for="fireproof"> Fireproof</label>#}
+{#      <input type="checkbox" id="fireproof" name="fireproof" value="yes">#}
+{##}
+{#      <input type="checkbox" id="insulated" name="insulated" value="yes">#}
+{#      <label for="insulated"> Insulated</label>#}
+{##}
+{#      <input type="checkbox" id="antibiotic" name="antibiotic" value="yes">#}
+{#      <label for="antibiotic"> Antibiotic</label>#}
+{##}
+{#      <input type="checkbox" id="banging" name="banging" value="yes">#}
+{#      <label for="banging"> Banging</label>#}
+
+      <br><br>
+      <label for="fireproof">Fireproof:</label>
+      <select name="fireproof" id="flag_color">
+          {%  for b in bool_options %}
+              <option value="{{ b }}">{{ b }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="insulated">Insulated:</label>
+      <select name="insulated" id="insulated">
+          {%  for b in bool_options %}
+              <option value="{{ b }}">{{ b }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="antibiotic">Antibiotics:</label>
+      <select name="antibiotic" id="antibiotic">
+          {%  for b in bool_options %}
+              <option value="{{ b }}">{{ b }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="banging">Banging:</label>
+      <select name="banging" id="banging">
+          {%  for b in bool_options %}
+              <option value="{{ b }}">{{ b }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
+      <label for="algo">Algo:</label>
+      <select name="algo" id="algo">
+          {%  for al in algo_options %}
+              <option value="{{ al }}">{{ al }}</option>
+          {% endfor %}
+      </select>
+      <br><br>
+
+      <br><br>
     <input type="submit" class="button">
-    <label for="flag_color">Flag colour:</label>
-    <input type="text" name="flag_color" />
   </form>
 
   <p>
