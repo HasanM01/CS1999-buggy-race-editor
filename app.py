@@ -100,12 +100,41 @@ def home():
     return render_template('index.html', server_url=BUGGY_RACE_SERVER_URL)
 
 #------------------------------------------------------------
+# get users
+#------------------------------------------------------------
+def get_username_and_id():
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM users")
+    records = cur.fetchall()
+    ret_map = {}
+    for r in records:
+        ret_map[r['username']] = r['id']
+    return ret_map
+
+#------------------------------------------------------------
+# get users
+#------------------------------------------------------------
+def get_id_and_username():
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM users")
+    records = cur.fetchall()
+    ret_map = {}
+    for r in records:
+        ret_map[r['id']] = r['username']
+    return ret_map
+
+#------------------------------------------------------------
 # creating a new buggy:
 #  if it's a POST request process the submitted data
 #  but if it's a GET request, just show the form
 #------------------------------------------------------------
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
+    username_to_id = get_username_and_id()
     if request.method == 'GET':
         return render_template("buggy-form.html",
                                buggy=None,
@@ -118,7 +147,8 @@ def create_buggy():
                                armour_options=armour_options,
                                attack_options=attack_options,
                                algo_options=algo_options,
-                               bool_options=bool_options)
+                               bool_options=bool_options,
+                               users=list(username_to_id.keys()))
 
     elif request.method == 'POST':
         msg=""
@@ -143,6 +173,8 @@ def create_buggy():
         banging = request.form['banging']
         algo = request.form['algo']
         total_cost = 0.0
+        username = request.form['user']
+        user_id = username_to_id[username]
 
         print(f'qty_wheels = {qty_wheels}')
         print(f'power_type = {power_type}')
@@ -163,6 +195,8 @@ def create_buggy():
         print(f'antibiotic = {antibiotic}')
         print(f'banging = {banging}')
         print(f'algo = {algo}')
+        print(f'username = {username}')
+        print(f'user_id = {user_id}')
 
         # validation checks
         if not qty_wheels.isdigit():
@@ -231,7 +265,8 @@ def create_buggy():
                         antibiotic,
                         banging,
                         algo,
-                        total_cost
+                        total_cost,
+                        user_id
                     )
                     values (
                         {new_id},   
@@ -253,7 +288,8 @@ def create_buggy():
                         '{antibiotic}',
                         '{banging}',
                         '{algo}',
-                        {total_cost}
+                        {total_cost},
+                        {user_id}
                     )       
                 """
 
@@ -290,6 +326,8 @@ def show_buggies():
 def edit_buggy(id):
     print(f'edit_buggy id = {id}')
     print(f'request.method = {request.method}')
+    username_to_id = get_username_and_id()
+    id_to_username = get_id_and_username()
 
     if request.method == 'GET':
         con = sql.connect(DATABASE_FILE)
@@ -299,6 +337,9 @@ def edit_buggy(id):
         print(f'query_sql = {query_sql}')
         cur.execute(query_sql)
         record = cur.fetchone()
+        print(f'record = {record}')
+        print(f"user_id = {record['user_id']}")
+        username = id_to_username[record['user_id']]
 
         return render_template("buggy-edit.html",
                                buggy=record,
@@ -311,7 +352,9 @@ def edit_buggy(id):
                                armour_options=armour_options,
                                attack_options=attack_options,
                                algo_options=algo_options,
-                               bool_options=bool_options)
+                               bool_options=bool_options,
+                               users=list(username_to_id.keys()),
+                               username=username)
     elif request.method == 'POST':
         msg=""
         print(request.form)
@@ -335,6 +378,8 @@ def edit_buggy(id):
         banging = request.form['banging']
         algo = request.form['algo']
         total_cost = 0.0
+        username = request.form['user']
+        user_id = username_to_id[username]
 
         print(f'qty_wheels = {qty_wheels}')
         print(f'power_type = {power_type}')
@@ -355,6 +400,8 @@ def edit_buggy(id):
         print(f'antibiotic = {antibiotic}')
         print(f'banging = {banging}')
         print(f'algo = {algo}')
+        print(f'username = {username}')
+        print(f'user_id = {user_id}')
 
         # validation checks
         if not qty_wheels.isdigit():
@@ -418,13 +465,14 @@ def edit_buggy(id):
                         antibiotic=?,
                         banging=?,
                         algo=?,
-                        total_cost=?
+                        total_cost=?,
+                        user_id=?
                     WHERE id=?             
                     """,
                     (qty_wheels, power_type, power_units, aux_power_type, aux_power_units,
                      hamster_booster, flag_color, flag_pattern, flag_color_secondary,
                      tyres, qty_tyres, armour, qty_attack, fireproof, insulated, antibiotic,
-                     banging, algo, total_cost, id)
+                     banging, algo, total_cost, user_id, id)
 
                 )
                 con.commit()
@@ -490,12 +538,76 @@ def summary():
     print(ret_map)
     return jsonify(ret_map)
 
-    # buggies = dict(zip([column[0] for column in cur.description], cur.fetchone())).items()
-    # return jsonify({ key: val for key, val in buggies if (val != "" and val is not None) })
+    '''
+    # returns on the first buggy as a json
+    buggies = dict(zip([column[0] for column in cur.description], cur.fetchone())).items()
+    return jsonify({ key: val for key, val in buggies if (val != "" and val is not None) })
+    '''
 
 @app.route('/poster')
 def poster():
    return render_template('poster.html')
+
+#------------------------------------------------------------
+# a page for displaying users
+#------------------------------------------------------------
+@app.route('/users')
+def show_users():
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM users")
+    records = cur.fetchall()
+    return render_template("users.html", user=records, number_of_users=len(records))
+
+
+#------------------------------------------------------------
+# creating a new user:
+#  if it's a POST request process the submitted data
+#  but if it's a GET request, just show the form
+#------------------------------------------------------------
+@app.route('/newuser', methods = ['POST', 'GET'])
+def create_user():
+    if request.method == 'GET':
+        return render_template("user-form.html")
+
+    elif request.method == 'POST':
+        msg=""
+        print(request.form)
+        username = request.form['username']
+        print(f'username = {username}')
+
+        try:
+            with sql.connect(DATABASE_FILE) as con:
+                cur = con.cursor()
+                cur.execute("SELECT MAX(id) FROM users")
+                max_id = cur.fetchone()[0]
+                new_id = max_id + 1
+
+                print(f'new_id = {new_id}')
+                insert_sql = f"""
+                    INSERT INTO users (
+                        id,
+                        username
+                    )
+                    values (
+                        {new_id},   
+                        "{username}"
+                    )       
+                """
+
+                print(f'insert_sql = {insert_sql}')
+                cur.execute(insert_sql)
+                con.commit()
+                msg = f"Record ({new_id}) successfully saved"
+        except:
+            con.rollback()
+            msg = "error in update operation"
+        finally:
+            con.close()
+
+        return render_template("updated.html", msg = msg)
+
 
 # You shouldn't need to add anything below this!
 if __name__ == '__main__':
