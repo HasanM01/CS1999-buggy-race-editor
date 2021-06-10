@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Users</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+        </tr>
+        {%  for i in range(0, number_of_users) %}
+            <tr>
+                <td> {{ user[i]['id'] }} </td>
+                <td> {{ user[i]['username'] }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+  <p>
+    <a href="/" class="button">home</a>
+  </p>
+
+{% endblock %}
