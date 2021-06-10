@@ -13,6 +13,15 @@
           {{ msg }}
       </p>
 
+      <br><br>
+      <label for="user">User:</label>
+      <select name="user" id="user">
+          {%  for u in users %}
+              <option value="{{ u }}">{{ u }}</option>
+          {% endfor %}
+      </select>
+
+      <br><br>
       <label for="qty_wheels">Number of wheels:</label>
       <input type="text" name="qty_wheels" value="4">
 
