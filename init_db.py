@@ -47,7 +47,19 @@ connection.execute("""
     antibiotic            VARCHAR(5) DEFAULT 'false',
     banging               VARCHAR(5) DEFAULT 'false',
     algo                  VARCHAR(20) DEFAULT 'steady',
-    total_cost            NUMBER DEFAULT 0.0
+    total_cost            NUMBER DEFAULT 0.0,
+    user_id               INTEGER DEFAULT 1
+  )
+""")
+
+connection.execute("""
+  DROP TABLE IF EXISTS users
+""")
+
+connection.execute("""
+  CREATE TABLE IF NOT EXISTS users (
+  id                    INTEGER PRIMARY KEY,
+  username              VARCHAR(20) NOT NULL
   )
 """)
 
@@ -64,6 +76,8 @@ if len(rows) == 0:
 else:
   print("- Found a buggy in the database, nice")
 
+cursor.execute("INSERT INTO users (id, username) VALUES (1, 'hasan')")
+connection.commit()
 
 print("- OK, your database is ready")
 
