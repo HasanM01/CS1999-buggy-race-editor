@@ -16,6 +16,14 @@
   .cs1999-tasks .task h2 {
     border-bottom: 3px solid gray;
   }
+  .cs1999-tasks .heading {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid black;
+  }
+  .cs1999-tasks .heading h2 {
+    border-bottom: 3px solid gray;
+  }
 </style>
 
 <!-- see tech note about the poster:
@@ -34,6 +42,23 @@
 <!-- task you attempted.                                                          -->
 
 <section class="cs1999-tasks">
+  <div class="heading">
+      <p><b>The main features of the buggy editor are:</b></p>
+      <p>
+      The ability to create a buggy in a quick and easy way
+      You can create a user and assign the buggy to yourself
+      Its quick and easy to export the JSON for any buggys that you want to race!
+      </p>
+      <p>
+      By using my buggy editor you will save yourself the time and stress of picking the parts! Let the majority of the fields be filled by drop downs!
+      </p>
+      <p>
+      In terms of making further edits, I made the code fairly easy to read and follow along with by having each main function have its own function. Therefore, finding the right function is fairly easy.
+      </p>
+      <p>
+      Furthermore, the server has a lot of flexibility for additional features to be added in the future, with the CSS being formatted in such a way where further buttons and content can be easily fitted as appropriate.
+      </p>
+  </div>
 
   <div class="task">
     <h2>0-GET</h2>
@@ -54,7 +79,7 @@
     <div class="task">
   <h2>0-GET Get the source code</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I forked the repo from the main github repository to my personal github repository.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -72,7 +97,7 @@
 <div class="task">
   <h2>0-CHANGE Make a change to a template and see it appear</h2>
   <p>
-    I made a modification to the template and once restarted the change was visible.
+    I made a modification to the template and once I restarted the web server the changes were visible.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -93,23 +118,25 @@
     I validated the number of wheels field, to only allow integers to be entered.
   </p>
   <p>
-   In the event of a non integer being entered, an error message would display telling the user that only an
+   In the event of a non integer being entered, an error message would display above the input telling the user that only an
       integer is acceptable.
   </p>
 </div>
 <div class="task">
   <h2>1-STYLE Style your editor just how you like it</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I made changes to the positioning of the buttons
   </p>
   <p>
-    <!-- sentence(s) on anything interesting/incomplete you did -->
+    I found initially I was focussing too much on the design and looks of the program (through editing the css)
+      therefore, I chose to move on to the other tasks and implement further functionality to the server
   </p>
 </div>
 <div class="task">
   <h2>2-EDIT Edit the record by loading its current values into the form</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I implemented an edit button in the show buggy area. This allows for the form to show all the currently laid
+      out data and made any modification that you wish.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -118,25 +145,32 @@
 <div class="task">
   <h2>2-FORM Make the form better</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I found it could be tiresome to enter all of the data manually, and adding the relevant validation for each field
+      would also be time-consuming. Therefore, for fields where there are a finite number of results, I added drop downs
+      which removes the chance of adding invalid data. I also modified the show buggy to show the buggies in a table.
+      I added a edit/delete button in the table for each buggy. I experimented in showing the the table transposed.
   </p>
   <p>
-    <!-- sentence(s) on anything interesting/incomplete you did -->
+    I kept some fields as data input for convience, as its easier to input the number of wheels manually than it is from
+      a drop down.
   </p>
 </div>
 <div class="task">
   <h2>2-COST Calculate and save the game cost of the buggy</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I hard coded as constants the cost of each part, once the buggy is assembled by the user, the overall price is calculated
+      stored with the buggy, and also displayed with all of the buggy data.
   </p>
   <p>
-    <!-- sentence(s) on anything interesting/incomplete you did -->
+    Would have preferred if the costs breakdown could be pulled from server. That way any cost changes would not need
+      the UI code to change.
   </p>
 </div>
 <div class="task">
   <h2>2-RULES Add validation according to the game rules</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    Checked all quantities were digits and not strings. Only applied hamster_booster when power_type is hamster.
+      Defined the default values as defined in the specification in the database tables and in the make buggy page.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -145,7 +179,8 @@
 <div class="task">
   <h2>3-ENV Switch between dev and production environments</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    Pycharm allows me to adjust the FLASK_ENV when running the program. This is normally set to development and can
+      be changed to production.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -154,7 +189,7 @@
 <div class="task">
   <h2>3-AUTOFILL Add auto-fill to the edit forms</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I chose to further enhance and add further drop down menu's as I found them easier for data input rather than input boxes.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -163,7 +198,8 @@
 <div class="task">
   <h2>3-MULTI Allow different buggies to be created</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I changed the way in which the system worked, each buggy is assigned an id, so when a new buggy is created then a
+      new database entry is made which allows for them all shown.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
@@ -172,10 +208,11 @@
 <div class="task">
   <h2>3-DEL Allow buggies to be deleted</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    Along with the edit button in the show buggy screen I added a delete button.
   </p>
   <p>
-    <!-- sentence(s) on anything interesting/incomplete you did -->
+    The process of getting the edit button and delete button to format correctly took some time, as the table would sometimes
+      misallign.
   </p>
 </div>
 <div class="task">
@@ -190,10 +227,43 @@
 <div class="task">
   <h2>3-TESTS Write some tests</h2>
   <p>
-    <!-- sentence on _how_ you fixed it -->
+    I performed all the tests manually. I would check the database to make sure inserts and updated happened as expected.
+  </p>
+  <p>
+    I would have liked to have written some unit test or used some UI testing tools like selenium.
+  </p>
+</div>
+
+    <div class="task">
+  <h2>4-USERS Add users (and sessions) so you know who is editing a buggy</h2>
+  <p>
+    Created a users table in the data and add a user_id column to the buggy database. Additionally changed the buggy
+      page so user can be assigned to a buggy. Drop down list shows user name, which is better than showing user id.
   </p>
   <p>
     <!-- sentence(s) on anything interesting/incomplete you did -->
+  </p>
+</div>
+
+<div class="task">
+  <h2>4-REGISTER Make a new user</h2>
+  <p>
+    Implemented a add user page and page to show users. Each new user added is assigned a new id and all users as a
+      table in show users page
+  </p>
+  <p>
+    <!-- sentence(s) on anything interesting/incomplete you did -->
+  </p>
+</div>
+
+<div class="task">
+  <h2>4-OWNER A buggy belongs to a user</h2>
+  <p>
+    When making a buggy or editing a buggy, a user can be selected. Implemented a drop down of user name available
+  </p>
+  <p>
+    Tried to make sure when selecting a user it done using the username, not the id. Further enhancements would be to
+      allow the ability to edit or remove a user. Or have a login page s user id can be automatically assigned.
   </p>
 </div>
 
