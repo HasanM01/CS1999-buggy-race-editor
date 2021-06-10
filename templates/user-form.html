@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Add user</h1>
+  <p>
+    {{ msg }}
+  </p>
+
+  <form action="/newuser" method="post">
+      <h1>Add user</h1>
+      <p>
+          {{ msg }}
+      </p>
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" value="">
+
+      <br><br>
+    <input type="submit" class="button">
+  </form>
+
+  <p>
+    <a href="/" class="button">home</a>
+  </p>
+
+{% endblock %}
